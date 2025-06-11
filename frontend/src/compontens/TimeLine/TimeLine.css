@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+.time-container {
+    font-family: "Roboto Mono", monospace;
+    margin: 0 auto;
+    /* 左边时间线的边框 */
+    position: relative;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+
+    max-height: 70vh;
+    /* 设置最大高度为 50vh */
+    overflow-y: auto;
+    /* 超过最大高度时，显示垂直滚动条 */
+    width: 100%;
+    /* 确保容器宽度占满父容器 */
+}
+
+/* 自定义滚动条 */
+.time-container::-webkit-scrollbar {
+    width: 3px; /* 滚动条宽度 */
+    height: 10px; /* 滚动条的高度（水平滚动条） */
+}
+
+/* 自定义滚动条背景 */
+.time-container::-webkit-scrollbar-track {
+    background-color: black; /* 滚动条背景为黑色 */
+}
+
+/* 自定义滚动条滑块 */
+.time-container::-webkit-scrollbar-thumb {
+    background-color: white; /* 滚动条为白色 */
+    border-radius: 10px; /* 可选：设置滚动条的圆角 */
+}
+
+/* 可选：设置滚动条滑块的交互效果 */
+.time-container::-webkit-scrollbar-thumb:hover {
+    background-color: lightgray; /* 悬停时滚动条变为浅灰色 */
+}
+
+.time-container a {
+    font-size: 20px;
+    margin-top: 10px;
+    color: #434343;
+    /* 添加过渡属性 */
+    transition: color 0.5s ease; /* 1秒渐变 */
+}
+
+.time-container a:hover {  /* 注意: 是 :hover 而不是 ::hover */
+    color: #F4A7B9;
+}

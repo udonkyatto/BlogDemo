@@ -1,0 +1,37 @@
+.display-container {
+    display: flex;
+    /* 使用 Flexbox 布局 */
+    justify-content: space-between;
+    /* 可以调整子元素之间的间隔 */
+    width: 100%;
+    /* 容器宽度为 100% */
+    gap: 20px;
+    /* 让子元素之间有空隙 */
+}
+
+.display-container .time-line {
+    flex: 0 0 10%;
+    /* 设置 TimeLine 宽度为 20% */
+}
+
+.display-container .display-blogs {
+    flex: 0 0 90%;
+    /* 设置 display-blogs 宽度为 50% */
+    word-wrap: break-word;
+    /* 允许在单词内断行 */
+    overflow-wrap: break-word;
+    /* 另一个断行的属性 */
+}
+
+a {
+    display: block;
+    font-size: 20px;
+    margin-top: 10px;
+    color: #434343;
+    /* 添加过渡属性 */
+    transition: color 0.5s ease; /* 1秒渐变 */
+}
+
+.time-container a:hover {  /* 注意: 是 :hover 而不是 ::hover */
+    color: #F4A7B9;
+}

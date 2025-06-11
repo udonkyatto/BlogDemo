@@ -1,0 +1,25 @@
+.card-container {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    padding: 20px;
+    border-bottom: 2px dashed gray;
+    max-width: 100%; /* 确保容器宽度不会超出父容器 */
+    box-sizing: border-box; /* 确保边框包含在元素的宽度内 */
+    gap: 10px;
+}
+
+span {
+    margin: 10px;
+    width: 100%;  /* 使 span 宽度占满父容器宽度 */
+    overflow: hidden;  /* 隐藏超出部分 */
+    text-overflow: ellipsis;  /* 超出部分显示省略号 */
+    display: block;  /* 让 span 占据独立的一行 */
+    word-wrap: break-word;  /* 允许在单词内换行（如果需要） */
+}
+
+h3 {
+  color: #A5DEE4;
+  cursor: pointer;
+  font-size: 20px;
+}
