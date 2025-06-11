@@ -8,13 +8,23 @@ export const Display = ({ category, setCategory }) => {
     const { blog_list } = useContext(StoreContext);
     const [selectedDate, setSelectedDate] = useState(null); // 改为按天选择
 
+    // 修改分类点击逻辑
+    const handleCategoryClick = (clickedCategory) => {
+        if (category === clickedCategory) {
+            setCategory("All"); // 如果点击已选分类，则清除过滤
+        } else {
+            setCategory(clickedCategory); // 否则切换到新分类
+        }
+    };
+
+
     // 提取所有博客的日期
     const dates = blog_list.map(item => item.date);
 
     // 根据 category 和 selectedDate 过滤博客
     const filteredBlogs = blog_list.filter(item => {
         const matchesCategory = category === "All" || category === item.category;
-        const matchesDate = !selectedDate || 
+        const matchesDate = !selectedDate ||
             new Date(item.date).toISOString().slice(0, 10) === selectedDate;
         return matchesCategory && matchesDate;
     });
@@ -35,11 +45,12 @@ export const Display = ({ category, setCategory }) => {
                         key={index}
                         id={item._id}
                         title={item.title}
+                        linksrc={item.linksrc}
                         description={item.description}
                         date={item.date}
                         category={item.category}
-                        onCategoryClick={setCategory}  // 传递点击处理函数
-                        isSelected={category === item.category}  // 传递是否选中状态
+                        onCategoryClick={handleCategoryClick}
+                        isSelected={category === item.category}
                     />
                 ))}
             </div>

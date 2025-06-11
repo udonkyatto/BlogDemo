@@ -7,6 +7,7 @@ const addBlog = async (req, res) => {
         title: req.body.title,
         date: req.body.date,
         category: req.body.category,
+        linksrc: req.body.linksrc
     })
     try {
         await blog.save()
