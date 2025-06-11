@@ -5,10 +5,10 @@ const blogSchema = new mongoose.Schema({
     description: { type: String, require: true },
     date: {
         type: Date,
-        default: () => new Date(new Date().getFullYear(), new Date().getMonth(), 1), 
-        required: false      // 不是必须的，因为有默认值
+        default: Date.now,  // 使用当前时间戳
+        required: false
     },
-    category: { 
+    category: {
         type: String,
         required: true,
     }

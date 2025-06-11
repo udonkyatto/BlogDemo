@@ -6,7 +6,7 @@ import { StoreContext } from '../context/blogContext.jsx';
 
 export const Display = ({ category, setCategory }) => {
     const { blog_list } = useContext(StoreContext);
-    const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedDate, setSelectedDate] = useState(null); // 改为按天选择
 
     // 提取所有博客的日期
     const dates = blog_list.map(item => item.date);
@@ -19,24 +19,13 @@ export const Display = ({ category, setCategory }) => {
         return matchesCategory && matchesDate;
     });
 
-    // 处理分类点击
-    const handleCategoryClick = (clickedCategory) => {
-        if (category === clickedCategory) {
-            // 如果点击的是当前已选中的分类，则取消过滤
-            setCategory("All");
-        } else {
-            // 否则过滤该分类
-            setCategory(clickedCategory);
-        }
-    };
-
     return (
         <div className="display-container">
             <div className="time-line">
                 <TimeLine
                     dates={dates}
-                    selectedDate={selectedDate}
-                    onSelectDate={setSelectedDate}
+                    selectedDate={selectedDate}  // 传递当前选中日期
+                    onSelectDate={setSelectedDate}  // 传递日期选择函数
                 />
             </div>
 
@@ -49,8 +38,8 @@ export const Display = ({ category, setCategory }) => {
                         description={item.description}
                         date={item.date}
                         category={item.category}
-                        onCategoryClick={handleCategoryClick}  // 使用新的处理函数
-                        isSelected={category === item.category}
+                        onCategoryClick={setCategory}  // 传递点击处理函数
+                        isSelected={category === item.category}  // 传递是否选中状态
                     />
                 ))}
             </div>
