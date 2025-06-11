@@ -5,7 +5,7 @@
     /* 可以调整子元素之间的间隔 */
     width: 100%;
     /* 容器宽度为 100% */
-    gap: 20px;
+    gap: 70px;
     /* 让子元素之间有空隙 */
 }
 
@@ -34,4 +34,8 @@ a {
 
 .time-container a:hover {  /* 注意: 是 :hover 而不是 ::hover */
     color: #F4A7B9;
+}
+.time-item.active {
+  color: #F4A7B9;
+  font-weight: bold;
 }

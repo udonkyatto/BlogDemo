@@ -4,13 +4,12 @@
     margin: 10px;
     padding: 20px;
     border-bottom: 2px dashed gray;
-    max-width: 100%; /* 确保容器宽度不会超出父容器 */
+    max-width: 80%; /* 确保容器宽度不会超出父容器 */
     box-sizing: border-box; /* 确保边框包含在元素的宽度内 */
     gap: 10px;
 }
 
 span {
-    margin: 10px;
     width: 100%;  /* 使 span 宽度占满父容器宽度 */
     overflow: hidden;  /* 隐藏超出部分 */
     text-overflow: ellipsis;  /* 超出部分显示省略号 */
@@ -22,4 +21,25 @@ h3 {
   color: #A5DEE4;
   cursor: pointer;
   font-size: 20px;
+}
+h5 {
+  color: darkcyan;
+  display: inline-block;
+  margin: 10px;
+}
+.card-container h5 {
+    display: inline-block;
+    margin-left: 10px;
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+.card-container h5:hover {
+    color: #F4A7B9;
+    text-decoration: underline;
+}
+
+.card-container h5.selected {
+    color: #F4A7B9;
+    font-weight: bold;
 }

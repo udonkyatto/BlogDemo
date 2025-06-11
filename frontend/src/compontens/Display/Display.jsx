@@ -4,51 +4,53 @@ import { BlogCard } from '../BlogCard/BlogCard.jsx';
 import { TimeLine } from '../TimeLine/TimeLine.jsx';
 import { StoreContext } from '../context/blogContext.jsx';
 
-export const Display = () => {
+export const Display = ({ category, setCategory }) => {
     const { blog_list } = useContext(StoreContext);
-    const [selectedYearMonth, setSelectedYearMonth] = useState("All");
+    const [selectedDate, setSelectedDate] = useState(null);
 
-    // 获取去重且排序后的年月列表
-    const uniqueYearMonths = blog_list
-        .map(item => {
-            const dateObj = new Date(item.date);
-            return `${dateObj.getFullYear()}-${String(dateObj.getMonth() + 1).padStart(2, '0')}`;
-        })
-        .filter((value, index, self) => self.indexOf(value) === index)
-        .sort((a, b) => b.localeCompare(a));
+    // 提取所有博客的日期
+    const dates = blog_list.map(item => item.date);
 
-    // 过滤显示的博客列表
-    const filteredBlogs = selectedYearMonth === "All" 
-        ? blog_list 
-        : blog_list.filter(item => {
-            const dateObj = new Date(item.date);
-            const itemYearMonth = `${dateObj.getFullYear()}-${String(dateObj.getMonth() + 1).padStart(2, '0')}`;
-            return itemYearMonth === selectedYearMonth;
-        });
+    // 根据 category 和 selectedDate 过滤博客
+    const filteredBlogs = blog_list.filter(item => {
+        const matchesCategory = category === "All" || category === item.category;
+        const matchesDate = !selectedDate || 
+            new Date(item.date).toISOString().slice(0, 10) === selectedDate;
+        return matchesCategory && matchesDate;
+    });
+
+    // 处理分类点击
+    const handleCategoryClick = (clickedCategory) => {
+        if (category === clickedCategory) {
+            // 如果点击的是当前已选中的分类，则取消过滤
+            setCategory("All");
+        } else {
+            // 否则过滤该分类
+            setCategory(clickedCategory);
+        }
+    };
 
     return (
         <div className="display-container">
             <div className="time-line">
-                {uniqueYearMonths.map((yearMonth, index) => (
-                    <a
-                        key={index}
-                        onClick={() => setSelectedYearMonth(yearMonth)}
-                        style={{ cursor: 'pointer', marginRight: '10px' }}
-                    >
-                        {yearMonth}
-                    </a>
-                ))}
+                <TimeLine
+                    dates={dates}
+                    selectedDate={selectedDate}
+                    onSelectDate={setSelectedDate}
+                />
             </div>
-            
+
             <div className="display-blogs">
                 {filteredBlogs.map((item, index) => (
-                    <BlogCard 
-                        key={index} 
-                        id={item._id} 
-                        title={item.title} 
-                        description={item.description} 
-                        date={item.date} 
-                        image={item.image} 
+                    <BlogCard
+                        key={index}
+                        id={item._id}
+                        title={item.title}
+                        description={item.description}
+                        date={item.date}
+                        category={item.category}
+                        onCategoryClick={handleCategoryClick}  // 使用新的处理函数
+                        isSelected={category === item.category}
                     />
                 ))}
             </div>
