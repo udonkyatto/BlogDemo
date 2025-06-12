@@ -1,34 +1,42 @@
 .card-container {
     display: flex;
+    flex-direction: column;
     margin: 10px;
     padding: 20px;
     border-bottom: 2px dashed gray;
-    max-width: 80%; /* 确保容器宽度不会超出父容器 */
-    box-sizing: border-box; /* 确保边框包含在元素的宽度内 */
+    max-width: 80%;
+    box-sizing: border-box;
     gap: 10px;
 }
 
+.title-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
 span {
-    width: 100%;  /* 使 span 宽度占满父容器宽度 */
-    overflow: hidden;  /* 隐藏超出部分 */
-    text-overflow: ellipsis;  /* 超出部分显示省略号 */
-    display: block;  /* 让 span 占据独立的一行 */
-    word-wrap: break-word;  /* 允许在单词内换行（如果需要） */
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
 }
 
 h3 {
-  color: #A5DEE4;
-  cursor: pointer;
-  font-size: 20px;
+    color: #A5DEE4;
+    cursor: pointer;
+    font-size: 20px;
+    margin: 0;
 }
+
 h5 {
-  color: darkcyan;
-  display: inline-block;
-  margin: 10px;
+    color: darkcyan;
+    margin: 0;
+    font-size: 16px;
 }
+
 .card-container h5 {
-    display: inline-block;
-    margin-left: 10px;
     color: #666;
     transition: all 0.3s ease;
 }

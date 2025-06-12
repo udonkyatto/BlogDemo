@@ -2,42 +2,45 @@ import React from 'react'
 import "./BlogCard.css"
 
 export const BlogCard = ({ title, description, category, onCategoryClick, isSelected, linksrc }) => {
-    // 判断是否有数据传入，如果没有就显示示例卡片
-    const shouldShowExample = !title && !description && !category;
+    // 判断是否有数据传入
+    const hasData = title || description || category;
+    
+    // 默认卡片数据
+    const defaultCard = {
+        title: "项目后端地址",
+        description: "点击跳转后端,实现前端数据读取Demo",
+        category: "work",
+        linksrc: "https://example.com/api" // 你可以设置一个真实的默认链接
+    };
+
+    // 使用数据或默认值
+    const displayData = hasData ? 
+        { title, description, category, linksrc } : 
+        defaultCard;
 
     return (
         <div className='card-container'>
-            {shouldShowExample ? (
-                // 默认示例卡片
-                <>
-                    <h3>项目后端地址</h3>
-                    <h5>#work</h5>
-                    <span>点击跳转后端,实现前端数据读取Demo</span>
-                </>
-            ) : (
-                // 动态数据卡片
-                <>
-                    <h3
-                        onClick={() => {
-                            if (linksrc) window.location.href = linksrc;
-                        }}
-                        style={{ cursor: linksrc ? 'pointer' : 'default' }}
-                    >
-                        {title}
-                    </h3>
-                    <h5
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            if (onCategoryClick) onCategoryClick(category);
-                        }}
-                        className={isSelected ? 'selected' : ''}
-                        style={{ cursor: 'pointer' }}
-                    >
-                        #{category}
-                    </h5>
-                    <span>{description}</span>
-                </>
-            )}
+            <div className="title-line">
+                <h3
+                    onClick={() => {
+                        if (displayData.linksrc) window.location.href = displayData.linksrc;
+                    }}
+                    style={{ cursor: displayData.linksrc ? 'pointer' : 'default' }}
+                >
+                    {displayData.title}
+                </h3>
+                <h5
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        if (onCategoryClick) onCategoryClick(displayData.category);
+                    }}
+                    className={isSelected ? 'selected' : ''}
+                    style={{ cursor: 'pointer' }}
+                >
+                    #{displayData.category}
+                </h5>
+            </div>
+            <span>{displayData.description}</span>
         </div>
     );
 };
