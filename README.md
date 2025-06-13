@@ -25,7 +25,7 @@
 - npm 或 yarn
 
 ### 克隆仓库：
-bash   
+> bash   
 git clone https://github.com/udonkyatto/BlogDemo.git  
 cd BlogDemo
 ### 安装依赖：  
